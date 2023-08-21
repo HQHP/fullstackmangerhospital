@@ -1,4 +1,5 @@
 'use strict';
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
@@ -9,8 +10,8 @@ module.exports = {
       lastName: 'Ghost',
       address: 'VN',
       gender: 1,
-      typeRole: 'ROLE',
-      keyRole: 'R1',
+      roleId: 'ROLE',
+      phoneNumber: '12345689',
       createdAt: new Date(),
       updatedAt: new Date()
     }]);

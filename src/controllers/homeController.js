@@ -21,11 +21,41 @@ let postCrud=async(req,res)=>{
 let displayGetCrud=async(req,res)=>{
     let data = await CRUDServices.getAllUser()
     console.log(data)
-   return res.send('get crd')
+    return res.render('displayCrud.ejs',{
+        dataTable:data
+    })
+}
+let editCrud=async(req,res)=>{
+     let userId = req.query.id
+     if(userId){
+         let userData= await CRUDServices.getUserInfoById(userId)
+         console.log(userData)
+         return res.render('editCrud.ejs',{
+            user:userData
+         })
+        }
+     else{
+         return res.send('user not found')
+     }
+} 
+let putCrud=async(req,res)=>{
+    let data =req.body;
+    let allUser= await CRUDServices.updateUserData(data);
+    return res.render('displayCrud.ejs',{
+        dataTable:allUser
+    })
+}
+let deleteCrud = async(req,res)=>{
+    let id = req.query.id;
+    await CRUDServices.deleteUser(id)
+    
 }
 module.exports={
     getHomePage: getHomePage,
     getCrud:getCrud,
     postCrud:postCrud,
     displayGetCrud:displayGetCrud,
+    editCrud:editCrud,
+    putCrud:putCrud,
+    deleteCrud:deleteCrud,
 }
